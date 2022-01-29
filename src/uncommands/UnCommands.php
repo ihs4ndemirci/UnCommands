@@ -24,7 +24,6 @@ class UnCommands extends PluginBase{
 		@mkdir($this->getDataFolder());
         if(!file_exists($this->getDataFolder() . "commands.txt")){
             $config = new Config($this->getDataFolder().'commands.txt', Config::ENUM);
-            $this->getLogger()->info("Hey! I created a commands file. Usage: /uncommand <command>");
         }
 
         $this->unCommands();
