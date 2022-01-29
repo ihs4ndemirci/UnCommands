@@ -1,0 +1,8 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/ihs4ncim/UnCommands
+build-by-default: true
+branches:
+- main
+projects:
+  UnCommands:
+    path: ""
+...
