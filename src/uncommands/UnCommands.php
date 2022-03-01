@@ -45,7 +45,7 @@ class UnCommands extends PluginBase{
 
     private function unCommand($command){
         $commandMap = $this->getServer()->getCommandMap();
-		$cmd = $commandMap->getCommand($command);
+	$cmd = $commandMap->getCommand($command);
         if($cmd != null){
             $commandMap->unregister($cmd);
         }
