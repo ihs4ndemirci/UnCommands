@@ -6,6 +6,8 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\utils\Config;
 
+use uncommands\commands\UnCommand;
+
 class UnCommands extends PluginBase{
 
     private static $main;
@@ -24,7 +26,11 @@ class UnCommands extends PluginBase{
 		@mkdir($this->getDataFolder());
         if(!file_exists($this->getDataFolder() . "commands.txt")){
             $config = new Config($this->getDataFolder().'commands.txt', Config::ENUM);
+            $this->getLogger()->info("Hey! I created a commands file. Usage: /uncommand <command>");
         }
+
+        $command = $this->getServer()->getCommandMap();
+        $command->register("uncommand", new UnCommand("uncommand", $this));
 
         $this->unCommands();
     }
@@ -33,7 +39,7 @@ class UnCommands extends PluginBase{
         return $config = new Config($this->getDataFolder().'commands.txt', Config::ENUM);
     }
 
-    private function unCommands(){
+    public function unCommands(){
         $cmds = 0;
         $commands = $this->getDataBase()->getAll();
         foreach(array_keys($commands) as $command){
@@ -43,9 +49,15 @@ class UnCommands extends PluginBase{
         $this->getLogger()->info($cmds . " commands disabled.");
     }
 
-    private function unCommand($command){
+    public function addCommandList($arg){
+        $data = $this->getDataBase();
+        $data->set($arg);
+        $data->save();
+    }
+
+    public function unCommand($command){
         $commandMap = $this->getServer()->getCommandMap();
-	$cmd = $commandMap->getCommand($command);
+		$cmd = $commandMap->getCommand($command);
         if($cmd != null){
             $commandMap->unregister($cmd);
         }
