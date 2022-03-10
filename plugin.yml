@@ -3,3 +3,7 @@ api: 4.0.0
 version: 1.0
 main: uncommands\UnCommands
 author: ihs4ncim
+permissions:
+  uncommands.command:
+    default: op
+    description: "UnCommand"
