@@ -22,17 +22,26 @@ class UnCommand extends Command implements PluginOwned{
   public function __construct($name, UnCommands $plugin){
     parent::__construct("uncommand", "UnCommands", "/uncommand <command>");
     $this->plugin = $plugin;
+    $this->setPermission("uncommands.command");
   }
 
   public function execute(CommandSender $sender, string $label, array $args): bool{
+    if($sender->hasPermission("uncommands.command")){
       if(!$args){
-          $sender->sendMessage("Usage: /uncommand <command>");
+        $sender->sendMessage("Usage: /uncommand <command>");
       }else{
-          $arg = $args[0];
+        $arg = $args[0];
+        if($arg != "uncommand"){
           UnCommands::getAPI()->addCommandList($arg);
           UnCommands::getAPI()->unCommand($arg);
           $sender->sendMessage("$arg command disabled.");
+        }else{
+          $sender->sendMessage("No No No!");
+        }
       }
+    }else{
+      $sender->sendMessage("You can't use this command.");
+    }
     return true;
   }
 }
