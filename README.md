@@ -1,6 +1,7 @@
 # UnCommands
 UnCommands plugin for Pocketmine
 
+Use Command: /uncommand <command>
 Manuel Setting: from UnCommands Config file.
 
 
